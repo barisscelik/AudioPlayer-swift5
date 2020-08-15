@@ -14,6 +14,7 @@ import MediaPlayer
 var nowPlayingInfo = [String : Any] ()
 class ViewController: UIViewController ,AVAudioPlayerDelegate  {
 
+    //MARK: CREATE UI
     let playBtn : UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "play"), for: .normal)
@@ -96,6 +97,7 @@ class ViewController: UIViewController ,AVAudioPlayerDelegate  {
         return image
     }()
 
+    //MARK: FUNCTION CONTROL
     @objc func play_pause ()
     {
         if audioPlayer.isPlaying {
@@ -264,6 +266,7 @@ class ViewController: UIViewController ,AVAudioPlayerDelegate  {
 
     }
 
+    //sử dụng ViewWillAppear chỉ để cập nhật dữ liệu trên biểu mẫu
     override func viewWillAppear(_ animated: Bool) {
         if audioPlayer.isPlaying {
             getArtistInfo()
@@ -280,14 +283,14 @@ class ViewController: UIViewController ,AVAudioPlayerDelegate  {
         playerIconsStack.axis = .horizontal
         playerIconsStack.spacing = 10
         
-        view.addSubview(playerIconsStack)
+        //Add vào view các UI
         
         playerIconsStack.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, rigth: view.rightAnchor, marginTop: 0, marginLeft: 20, marginBottom: 80, marginRigth: 20, width: 0, heigth: 0)
-        
-        view.addSubview(slider)
-        
+        view.addSubview(playerIconsStack)
+
         slider.anchor(top: nil, left: view.leftAnchor, bottom: playerIconsStack.topAnchor, rigth: view.rightAnchor, marginTop: 0, marginLeft: 30, marginBottom: 12, marginRigth: 30, width: 0, heigth: 0)
-        
+        view.addSubview(slider)
+
         view.addSubview(time)
         time.anchor(top: nil, left: view.leftAnchor, bottom: slider.topAnchor, rigth: nil, marginTop: 0, marginLeft: 30, marginBottom: 8, marginRigth: 0, width: 0, heigth: 0)
         
@@ -327,6 +330,7 @@ class ViewController: UIViewController ,AVAudioPlayerDelegate  {
         
     }
 
+    //Xong
     @objc func action(){
         let controller = MusicList()
         navigationController?.pushViewController(controller, animated: true)
@@ -334,7 +338,7 @@ class ViewController: UIViewController ,AVAudioPlayerDelegate  {
     
     
     
-    
+    //Xong
     func prapareSong(){
         do{
             let audioPath = Bundle.main.path(forResource: songList[activeSong], ofType: ".mp3")
@@ -350,7 +354,7 @@ class ViewController: UIViewController ,AVAudioPlayerDelegate  {
         }
     }
     
-    
+    //Xong
     func getSongs()  {
         
                let folderUrl = URL(fileURLWithPath: Bundle.main.resourcePath!)
@@ -376,6 +380,7 @@ class ViewController: UIViewController ,AVAudioPlayerDelegate  {
             }
     }
 
+    //xong
     func getArtistInfo () {
        
        let audioPath = Bundle.main.path(forResource: songList[activeSong], ofType: ".mp3")
@@ -563,6 +568,7 @@ class ViewController: UIViewController ,AVAudioPlayerDelegate  {
      
 }
 
+//Xong
 extension UIView{
     func anchor(top : NSLayoutYAxisAnchor?
                 ,left : NSLayoutXAxisAnchor?,
